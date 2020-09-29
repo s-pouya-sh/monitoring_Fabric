@@ -1,8 +1,6 @@
 version: '3.2'
 networks:
     monitoring:
-      external:
-        name: swarmNetwork
 
 services:
   prometheus:
@@ -19,7 +17,7 @@ services:
 
   cadvisor:
     image: gcr.io/google-containers/cadvisor:latest
-    container_name: cadvisor-node0
+    container_name: cadvisor
     command: -logtostderr -docker_only
     ports:
       - 8080:8080
@@ -32,9 +30,9 @@ services:
     networks:
       - monitoring
 
-  node0-exporter:
+  node-exporter:
     image: prom/node-exporter:latest
-    container_name: node0-exporter
+    container_name: node-exporter
     ports:
       - 9100:9100
     volumes:
